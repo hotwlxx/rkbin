@@ -58,6 +58,7 @@ jobs:
         cd rkbin
         ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini
         echo "::set-output name=status::success"
+        ls  ${{ github.workspace }}
 
     - name: 检查github储存空间情况
       if: (!cancelled())
