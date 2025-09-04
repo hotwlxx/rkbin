@@ -71,13 +71,13 @@ jobs:
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: loader${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: rkbin/img/rk35
+        path: rkbin/img/rk1x
 
     - name: 整理固件文件夹
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd rkbin/bin/targets/*/*
+        cd rkbin/img/rk1x
         rm -rf packages
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
