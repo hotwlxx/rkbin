@@ -52,12 +52,18 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH rkbin
         ln -sf /workdir/rkbin $GITHUB_WORKSPACE/rkbin
 
+    - name: Save state
+      run: echo "{name}={value}" >> $GITHUB_STATE
+
+    - name: Set output
+      run: echo "{name}={value}" >> $GITHUB_OUTPUT
+
     - name: 开始编译固件
       id: compile
       run: |
         cd rkbin
-        ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini
-        echo "::set-output name=status::success"
+        ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini ../rkbin/img/rk1x
+        echo ${{ GITHUB_OUTPUT }}
         ls  ${{ github.workspace }}
 
     - name: 检查github储存空间情况
