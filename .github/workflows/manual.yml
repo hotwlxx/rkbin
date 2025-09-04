@@ -70,7 +70,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: OpenWrt_Lede_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: loader${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: rkbin/img/rk35
 
     - name: 整理固件文件夹
@@ -86,5 +86,5 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_Lede${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: loader_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
