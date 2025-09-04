@@ -6,27 +6,12 @@ name: boot_merger workflow
 # or API.
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
-        required: true
-        # The data type of the input
-        type: string
-
 
 env:
   REPO_URL: https://github.com/hotwlxx/rkbin
   REPO_BRANCH: master
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
-  UPLOAD_FIRMWARE: true
-  UPLOAD_COWTRANSFER: false
-  UPLOAD_WETRANSFER: false
   TZ: Asia/Shanghai
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -64,16 +49,9 @@ jobs:
       if: (!cancelled())
       run: df -hT
 
-    - name: 上传bin文件夹(固件+ipk)在github空间
+    - name: 打包项目
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: loader${{ env.FILE_DATE }}
         path: ${{ github.workspace }}
-
-    - name: 上传固件在github空间
-      uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && !cancelled()
-      with:
-        name: loader_bin${{ env.FILE_DATE }}
-        path: ${{ env.FIRMWARE }}
