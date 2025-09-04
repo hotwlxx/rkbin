@@ -58,7 +58,6 @@ jobs:
         cd rkbin
         ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini
         echo "::set-output name=status::success"
-        echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%H%M")"
         ls -l
 
     - name: 检查github储存空间情况
