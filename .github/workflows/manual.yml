@@ -71,15 +71,6 @@ jobs:
         name: loader${{ env.FILE_DATE }}
         path: rkbin/img/rk1x
 
-    - name: 整理固件文件夹
-      id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
-      run: |
-        cd rkbin/img/rk1x
-        rm -rf packages
-        echo "::set-env name=FIRMWARE::$PWD"
-        echo "::set-output name=status::success"
-
     - name: 上传固件在github空间
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
