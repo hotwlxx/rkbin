@@ -56,8 +56,8 @@ jobs:
       id: compile
       run: |
         cd rkbin
-        ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini ../rkbin/img/rk1x
-        ls -R  ${{ github.workspace }}
+        ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini
+        ls
 
     - name: 检查github储存空间情况
       if: (!cancelled())
