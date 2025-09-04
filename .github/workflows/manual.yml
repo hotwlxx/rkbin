@@ -29,4 +29,4 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: 编译boot固件
-      run: cd rkbin && ./tools/burner_image_kits/make.sh rk3568
+      run: rkbin/tools/burner_image_kits/make.sh rk3568
