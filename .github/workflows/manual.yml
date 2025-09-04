@@ -38,6 +38,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - name: 开始设置编译所需环境
+      run: |
+          sudo timedatectl set-timezone "$TZ"
+          sudo mkdir -p /workdir
+          sudo chown $USER:$GROUPS /workdir
+
     # Runs a single command using the runners shell
     - name: 下载源码
       working-directory: /workdir
