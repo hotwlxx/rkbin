@@ -56,4 +56,4 @@ jobs:
       id: compile
       run: |
         cd rkbin
-        ./tools/burner_image_kits/make.sh loader ../rkbin/RKBOOT/RK3568MINIALL.ini
+        ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini
