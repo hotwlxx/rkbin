@@ -20,7 +20,7 @@ on:
 
 
 env:
-  REPO_URL: https://github.com/rockchip-linux/rkbin
+  REPO_URL: https://github.com/hotwlxx/rkbin
   REPO_BRANCH: master
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
@@ -32,7 +32,7 @@ env:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
-  greet:
+  build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -52,19 +52,12 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH rkbin
         ln -sf /workdir/rkbin $GITHUB_WORKSPACE/rkbin
 
-    - name: Save state
-      run: echo "{name}={value}" >> $GITHUB_STATE
-
-    - name: Set output
-      run: echo "{name}={value}" >> $GITHUB_OUTPUT
-
     - name: 开始编译固件
       id: compile
       run: |
         cd rkbin
         ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini ../rkbin/img/rk1x
-        echo GITHUB_OUTPUT
-        ls  ${{ github.workspace }}
+        ls -R  ${{ github.workspace }}
 
     - name: 检查github储存空间情况
       if: (!cancelled())
