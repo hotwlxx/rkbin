@@ -63,7 +63,7 @@ jobs:
       run: |
         cd rkbin
         ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini ../rkbin/img/rk1x
-        echo ${{ GITHUB_OUTPUT }}
+        echo GITHUB_OUTPUT
         ls  ${{ github.workspace }}
 
     - name: 检查github储存空间情况
