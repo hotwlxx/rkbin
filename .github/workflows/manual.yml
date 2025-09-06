@@ -1,9 +1,5 @@
-# This is a basic workflow that is manually triggered
-
 name: boot_merger workflow
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   workflow_dispatch:
 
@@ -14,14 +10,10 @@ env:
   UPLOAD_BIN_DIR: true
   TZ: Asia/Shanghai
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: 开始设置编译所需环境
       run: |
@@ -29,7 +21,6 @@ jobs:
           sudo mkdir -p /workdir
           sudo chown $USER:$GROUPS /workdir
 
-    # Runs a single command using the runners shell
     - name: 下载源码
       working-directory: /workdir
       run: |
@@ -42,7 +33,8 @@ jobs:
       run: |
         cd rkbin
         ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini
-        echo "::set-output name=status::success"
+        # echo "::set-output name=status::success"
+        echo "status=success" >> $GITHUB_OUTPUT
         ls -l
 
     - name: 检查github储存空间情况
