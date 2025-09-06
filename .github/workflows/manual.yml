@@ -33,7 +33,6 @@ jobs:
       run: |
         cd rkbin
         ./tools/boot_merger ../rkbin/RKBOOT/RK3568MINIALL.ini
-        # echo "::set-output name=status::success"
         echo "status=success" >> $GITHUB_OUTPUT
         ls -l
 
@@ -45,5 +44,5 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: loader${{ env.FILE_DATE }}
+        name: loader
         path: ${{ github.workspace }}
